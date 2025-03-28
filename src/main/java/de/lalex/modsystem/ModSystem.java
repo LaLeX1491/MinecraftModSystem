@@ -2,6 +2,7 @@ package de.lalex.modsystem;
 
 import de.lalex.modsystem.commands.ClearChatCommand;
 import de.lalex.modsystem.dataStorage.DataStorage;
+import lombok.Getter;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,14 +15,18 @@ import java.util.Objects;
 
 public final class ModSystem extends JavaPlugin implements Serializable  {
 
+    @Getter
     private static ModSystem instance;
 
-    public static final Logger log = LoggerFactory.getLogger("ModSystem");
+    @Getter
+    private static final Logger logger = LoggerFactory.getLogger("ModSystem");
+
+    @Getter
     public static DataStorage dataStorage;
 
     @Override
     public void onEnable() {
-        log.info("starting plugin...");
+        logger.info("starting plugin...");
 
         instance = this;
 
@@ -32,7 +37,7 @@ public final class ModSystem extends JavaPlugin implements Serializable  {
         getCommand("cc").setExecutor(new ClearChatCommand());
 
 
-        log.info("startup complete!");
+        logger.info("startup complete!");
     }
 
     @Override
@@ -40,9 +45,6 @@ public final class ModSystem extends JavaPlugin implements Serializable  {
         // Plugin shutdown logic
     }
 
-    public static ModSystem getInstance() {
-        return instance;
-    }
 
     public static @NotNull Component getPrefix() {
         return LegacyComponentSerializer.legacyAmpersand().deserialize(Objects.requireNonNull(getInstance().getConfig().getString("prefix")));
