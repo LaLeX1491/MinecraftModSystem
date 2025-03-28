@@ -3,6 +3,7 @@ package de.lalex.modsystem;
 import de.lalex.modsystem.commands.ClearChatCommand;
 import de.lalex.modsystem.commands.KickCommand;
 import de.lalex.modsystem.dataStorage.DataStorage;
+import de.lalex.modsystem.teammessages.TeamChatListener;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.kyori.adventure.text.Component;
@@ -35,6 +36,8 @@ public final class ModSystem extends JavaPlugin implements Serializable  {
 
         dataStorage = new DataStorage();
         this.saveDefaultConfig();
+
+        getServer().getPluginManager().registerEvents(new TeamChatListener(), this);
 
         getCommand("cc").setExecutor(new ClearChatCommand());
         getCommand("kick").setExecutor(new KickCommand());

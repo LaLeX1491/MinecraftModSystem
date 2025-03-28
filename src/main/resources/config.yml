@@ -2,9 +2,9 @@
 timezone: "Europe/Berlin"
 
 # Prefix of the plugin
-prefix: "&9&lModSystem &8»"
-team-chat-prefix: "&9&lModSystem &b[Teamchat] &8»"
-team-log-prefix: "&9&lModSystem &b[Log] &8»"
+prefix: "&9&lModSystem &8» "
+team-chat-prefix: "&9&lModSystem &b[Teamchat] &8» "
+team-log-prefix: "&9&lModSystem &b[Log] &8» "
 
 # Enables the team chat. Permitted members can send messages via adding @team at the beginning of the message.
 team-chat: true
