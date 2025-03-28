@@ -18,17 +18,13 @@ public class DataStorage {
             try {
                 File parentDir = dataFile.getParentFile();
                 if (parentDir != null && !parentDir.exists() && !parentDir.mkdirs()) {
-                    ModSystem.log.error("Fehler beim Erstellen der Verzeichnisse.");
+                    ModSystem.log.error("Error creating/finding the directory");
                     return;
                 }
-                if (dataFile.createNewFile()) {
-                    ModSystem.log.info("Datei 'data.dat' wurde erstellt.");
-                } else {
-                    ModSystem.log.info("Datei 'data.dat' existiert bereits.");
-                }
+                dataFile.createNewFile();
             } catch (IOException e) {
-                ModSystem.log.error("Fehler beim Erstellen der Datei: {}", e.getMessage());
-                e.printStackTrace(); // Detaillierte Fehlerausgabe
+                ModSystem.log.error("Error creating the data file: {}", e.getMessage());
+                ModSystem.log.debug(Arrays.toString(e.getStackTrace()));
                 return;
             }
         }
@@ -47,14 +43,12 @@ public class DataStorage {
                 if (obj instanceof Map) {
                     dataMap = (Map<String, Object>) obj;
                 } else {
-                    ModSystem.log.error("Deserialisierte Daten entsprechen nicht dem erwarteten Typ.");
+                    ModSystem.log.error("Deserializated data does not match the requested type");
                     break;
                 }
             }
-        } catch (EOFException e) {
-            // Ende der Datei erreicht, keine weiteren Objekte zum Lesen
         } catch (IOException | ClassNotFoundException e) {
-            ModSystem.log.error("Fehler beim Laden der Datei: {}", e.getMessage());
+            ModSystem.log.error("Error loading the data file: {}", e.getMessage());
             ModSystem.log.debug(Arrays.toString(e.getStackTrace()));
         }
     }
@@ -63,7 +57,7 @@ public class DataStorage {
         try (ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(dataFile.toPath()))) {
             oos.writeObject(dataMap);
         } catch (IOException e) {
-            ModSystem.log.error("Error saving the file: {}", e.getMessage());
+            ModSystem.log.error("Error saving the data file: {}", e.getMessage());
             ModSystem.log.debug(Arrays.toString(e.getStackTrace()));
         }
     }
