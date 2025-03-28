@@ -1,6 +1,5 @@
 package de.lalex.modsystem.service;
 
-import de.lalex.modsystem.ModSystem;
 import de.lalex.modsystem.dataStorage.DataStorage;
 import de.lalex.modsystem.models.PunishmentEntity;
 import org.bukkit.entity.Player;

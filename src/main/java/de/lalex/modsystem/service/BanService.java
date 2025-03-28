@@ -15,7 +15,7 @@ import static de.lalex.modsystem.ModSystem.*;
 /**
  * Service to manage the bans
  * @author LaLeX1491
- * @version 1.
+ * @version 1.0
  * @since 2025-03-28
  */
 public class BanService {
