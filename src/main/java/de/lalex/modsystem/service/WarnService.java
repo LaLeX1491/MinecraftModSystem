@@ -1,7 +1,9 @@
 package de.lalex.modsystem.service;
 
 import de.lalex.modsystem.dataStorage.DataStorage;
+import de.lalex.modsystem.models.PunishmentEntity;
 import de.lalex.modsystem.models.WarnEntity;
+import de.lalex.modsystem.util.PunishmentType;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,6 +22,7 @@ public class WarnService {
 
     private static final String WARNS_PATH = ".warns";
     private final DataStorage dataStorage = getDataStorage();
+    private final PunishmentsService punishmentsService = new PunishmentsService();
 
     /**
      * Method to get all warns of a player
@@ -47,9 +50,16 @@ public class WarnService {
      * @param p Player where to add the punishment
      */
     public void addWarn(@NotNull WarnEntity warn, @NotNull Player p) {
-        List<WarnEntity> punishments = getWarns(p);
-        punishments.add(warn);
-        dataStorage.set(p.getUniqueId() + WARNS_PATH, punishments);
+        List<WarnEntity> warns = getWarns(p);
+        warns.add(warn);
+        punishmentsService.addPunishment(PunishmentEntity.builder()
+                .punishedBy(warn.getWarnedBy())
+                .playerPunished(warn.getPlayerWarned())
+                .punishmentReason(warn.getReason())
+                .timePunished(warn.getTimeWarned())
+                .punishmentType(PunishmentType.WARN)
+                .build(), p);
+        dataStorage.set(p.getUniqueId() + WARNS_PATH, warns);
     }
 
     /**

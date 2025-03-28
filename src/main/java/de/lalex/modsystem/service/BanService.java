@@ -39,6 +39,7 @@ public class BanService {
                 .timePunished(ZonedDateTime.now())
                 .punishmentReason(ban.getBanReason())
                 .punishmentType(PunishmentType.BAN)
+                .punishedBy(ban.getBannedBy())
                 .build(), p);
         return Optional.empty();
     }
@@ -66,6 +67,7 @@ public class BanService {
                 .timePunished(ZonedDateTime.now())
                 .punishmentReason(ban.getBanReason())
                 .punishmentType(PunishmentType.MUTE)
+                .punishedBy(ban.getBannedBy())
                 .build(), p);
     }
 

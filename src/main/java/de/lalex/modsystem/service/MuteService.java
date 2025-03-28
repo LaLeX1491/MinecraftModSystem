@@ -31,7 +31,7 @@ public class MuteService {
      * @param p Player who is getting muted
      * @return Optional(BanEntity) -> if the player is already muted it returns the Entity if not it returns empty Optional
      */
-    public Optional<MuteEntity> addMute(@NotNull MuteEntity mute, @NotNull Player p, @NotNull Player punisher) {
+    public Optional<MuteEntity> addMute(@NotNull MuteEntity mute, @NotNull Player p) {
         if(isPlayerMuted(p)) return Optional.ofNullable(getPlayerMute(p));
         dataStorage.set(p.getUniqueId() + MUTES_PATH, mute);
         punishmentsService.addPunishment(PunishmentEntity.builder()
@@ -39,7 +39,7 @@ public class MuteService {
                 .timePunished(ZonedDateTime.now())
                 .punishmentReason(mute.getReason())
                 .punishmentType(PunishmentType.MUTE)
-                .punishedBy(punisher.getUniqueId())
+                .punishedBy(mute.getMutedBy())
                 .build(), p);
         return Optional.empty();
     }
@@ -56,6 +56,7 @@ public class MuteService {
                 .timePunished(ZonedDateTime.now())
                 .punishmentReason(mute.getReason())
                 .punishmentType(PunishmentType.MUTE)
+                .punishedBy(mute.getMutedBy())
                 .build(), p);
     }
 
