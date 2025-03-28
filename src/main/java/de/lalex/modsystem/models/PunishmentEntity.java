@@ -8,6 +8,12 @@ import org.jetbrains.annotations.NotNull;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
+/**
+ * Entity for the punishment register
+ * @author LaLeX1491
+ * @version 1.0
+ * @since 2025-03-28
+ */
 @AllArgsConstructor
 @Builder
 @Getter
