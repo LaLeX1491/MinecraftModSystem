@@ -2,7 +2,6 @@ package de.lalex.modsystem.service;
 
 import de.lalex.modsystem.dataStorage.DataStorage;
 import de.lalex.modsystem.models.BanEntity;
-import de.lalex.modsystem.models.MuteEntity;
 import de.lalex.modsystem.models.PunishmentEntity;
 import de.lalex.modsystem.util.PunishmentType;
 import org.bukkit.entity.Player;
@@ -79,7 +78,7 @@ public class BanService {
         final Object rawObject = dataStorage.get(p.getUniqueId() + BANS_PATH);
         if(rawObject == null) return null;
         if(rawObject instanceof BanEntity) return (BanEntity) rawObject;
-        getLogger().error("Internal server error: playerBanRawObject !instanceof BanEntity");
+        getPluginLogger().error("Internal server error: playerBanRawObject !instanceof BanEntity");
         return null;
     }
 

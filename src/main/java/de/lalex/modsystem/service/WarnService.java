@@ -1,7 +1,6 @@
 package de.lalex.modsystem.service;
 
 import de.lalex.modsystem.dataStorage.DataStorage;
-import de.lalex.modsystem.models.PunishmentEntity;
 import de.lalex.modsystem.models.WarnEntity;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -35,10 +34,10 @@ public class WarnService {
             for(Object obj : rawList) {
                 if(obj instanceof WarnEntity) {
                     punishmentEntities.add((WarnEntity) obj);
-                } else getLogger().error("Internal server error: List<?> !instanceof List<WarnEntity> in the storage");
+                } else getPluginLogger().error("Internal server error: List<?> !instanceof List<WarnEntity> in the storage");
             }
             return punishmentEntities;
-        } else getLogger().error("Internal server error: object !instanceof list in the storage");
+        } else getPluginLogger().error("Internal server error: object !instanceof list in the storage");
         return null;
     }
 

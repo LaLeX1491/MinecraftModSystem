@@ -34,10 +34,10 @@ public class PunishmentsService {
             for(Object obj : rawList) {
                 if(obj instanceof PunishmentEntity) {
                     punishmentEntities.add((PunishmentEntity) obj);
-                } else getLogger().error("Internal server error: List<?> !instanceof List<PunishmentEntity> in the storage");
+                } else getPluginLogger().error("Internal server error: List<?> !instanceof List<PunishmentEntity> in the storage");
             }
             return punishmentEntities;
-        } else getLogger().error("Internal server error: object !instanceof list in the storage");
+        } else getPluginLogger().error("Internal server error: object !instanceof list in the storage");
         return null;
     }
 

@@ -31,7 +31,7 @@ public class MuteService {
      * @param p Player who is getting muted
      * @return Optional(BanEntity) -> if the player is already muted it returns the Entity if not it returns empty Optional
      */
-    public Optional<MuteEntity> addMute(@NotNull MuteEntity mute, @NotNull Player p) {
+    public Optional<MuteEntity> addMute(@NotNull MuteEntity mute, @NotNull Player p, @NotNull Player punisher) {
         if(isPlayerMuted(p)) return Optional.ofNullable(getPlayerMute(p));
         dataStorage.set(p.getUniqueId() + MUTES_PATH, mute);
         punishmentsService.addPunishment(PunishmentEntity.builder()
@@ -39,6 +39,7 @@ public class MuteService {
                 .timePunished(ZonedDateTime.now())
                 .punishmentReason(mute.getReason())
                 .punishmentType(PunishmentType.MUTE)
+                .punishedBy(punisher.getUniqueId())
                 .build(), p);
         return Optional.empty();
     }
@@ -78,7 +79,7 @@ public class MuteService {
         final Object rawObject = dataStorage.get(p.getUniqueId() + MUTES_PATH);
         if(rawObject == null) return null;
         if(rawObject instanceof MuteEntity) return (MuteEntity) rawObject;
-        getLogger().error("Internal server error: playerMuteRawObject !instanceof MuteEntity");
+        getPluginLogger().error("Internal server error: playerMuteRawObject !instanceof MuteEntity");
         return null;
     }
 

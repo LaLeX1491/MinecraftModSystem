@@ -3,6 +3,7 @@ package de.lalex.modsystem;
 import de.lalex.modsystem.commands.ClearChatCommand;
 import de.lalex.modsystem.dataStorage.DataStorage;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,31 +14,31 @@ import org.slf4j.LoggerFactory;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Slf4j
 public final class ModSystem extends JavaPlugin implements Serializable  {
 
     @Getter
     private static ModSystem instance;
 
     @Getter
-    private static final Logger logger = LoggerFactory.getLogger("ModSystem");
+    private static final Logger pluginLogger = LoggerFactory.getLogger("ModSystem");
 
     @Getter
     public static DataStorage dataStorage;
 
     @Override
     public void onEnable() {
-        logger.info("starting plugin...");
+        pluginLogger.info("starting plugin...");
 
         instance = this;
 
         dataStorage = new DataStorage();
         this.saveDefaultConfig();
 
-
         getCommand("cc").setExecutor(new ClearChatCommand());
 
 
-        logger.info("startup complete!");
+        pluginLogger.info("startup complete!");
     }
 
     @Override

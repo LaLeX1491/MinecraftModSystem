@@ -18,13 +18,13 @@ public class DataStorage {
             try {
                 File parentDir = dataFile.getParentFile();
                 if (parentDir != null && !parentDir.exists() && !parentDir.mkdirs()) {
-                    ModSystem.getLogger().error("Error creating/finding the directory");
+                    ModSystem.getPluginLogger().error("Error creating/finding the directory");
                     return;
                 }
                 dataFile.createNewFile();
             } catch (IOException e) {
-                ModSystem.getLogger().error("Error creating the data file: {}", e.getMessage());
-                ModSystem.getLogger().debug(Arrays.toString(e.getStackTrace()));
+                ModSystem.getPluginLogger().error("Error creating the data file: {}", e.getMessage());
+                ModSystem.getPluginLogger().debug(Arrays.toString(e.getStackTrace()));
                 return;
             }
         }
@@ -43,13 +43,13 @@ public class DataStorage {
                 if (obj instanceof Map) {
                     dataMap = (Map<String, Object>) obj;
                 } else {
-                    ModSystem.getLogger().error("Deserializated data does not match the requested type");
+                    ModSystem.getPluginLogger().error("Deserializated data does not match the requested type");
                     break;
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
-            ModSystem.getLogger().error("Error loading the data file: {}", e.getMessage());
-            ModSystem.getLogger().debug(Arrays.toString(e.getStackTrace()));
+            ModSystem.getPluginLogger().error("Error loading the data file: {}", e.getMessage());
+            ModSystem.getPluginLogger().debug(Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -57,8 +57,8 @@ public class DataStorage {
         try (ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(dataFile.toPath()))) {
             oos.writeObject(dataMap);
         } catch (IOException e) {
-            ModSystem.getLogger().error("Error saving the data file: {}", e.getMessage());
-            ModSystem.getLogger().debug(Arrays.toString(e.getStackTrace()));
+            ModSystem.getPluginLogger().error("Error saving the data file: {}", e.getMessage());
+            ModSystem.getPluginLogger().debug(Arrays.toString(e.getStackTrace()));
         }
     }
 
