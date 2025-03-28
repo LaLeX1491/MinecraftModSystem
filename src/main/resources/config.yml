@@ -1,0 +1,6 @@
+prefix: "&9&lModSystem &8»"
+messages:
+  no-permission: "%prefix% &cDazu hast du keine Rechte!"
+  cc: "%prefix% &rDer Chat wurde von &b%player% &rgelöscht."
+permissions:
+  clear-chat: "modsystem.cc"

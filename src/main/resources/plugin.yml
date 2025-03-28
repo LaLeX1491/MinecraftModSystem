@@ -1,0 +1,12 @@
+name: ModSystem
+version: '${project.version}'
+main: de.lalex.modsystem.ModSystem
+api-version: '1.21'
+prefix: ModSystem
+authors: [LaLeX1491]
+description: Moderation System for Minecraft Plugins
+commands:
+  cc:
+    description: A command to clear the Chat
+    aliases:
+      - chatclear
