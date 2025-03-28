@@ -16,15 +16,15 @@ public class TeamChatListener implements Listener {
     public void onPlayerChat(@NotNull AsyncChatEvent event) {
         String message = PlainTextComponentSerializer.plainText().serialize(event.message());
 
-        if(message.startsWith("@teamchat")) {
+        if(message.startsWith(Config.TEAM_CHAT_IDENTIFIER)) {
             if(event.getPlayer().hasPermission(Config.TEAM_CHAT_PERMISSION)) {
-                message = message.substring("@teamchat".length()).trim();
+                message = message.substring(Config.TEAM_CHAT_IDENTIFIER.length()).trim();
                 Component chatComponent = LegacyComponentSerializer.legacyAmpersand().deserialize(message);
                 event.setCancelled(true);
 
                 Bukkit.getOnlinePlayers().forEach(player -> {
                     if(player.hasPermission(Config.TEAM_CHAT_PERMISSION)) {
-                        player.sendMessage(Config.getTeamChatPrefix().append(chatComponent));
+                        player.sendMessage(Config.TEAM_CHAT_PREFIX.append(chatComponent));
                     }
                 });
             }

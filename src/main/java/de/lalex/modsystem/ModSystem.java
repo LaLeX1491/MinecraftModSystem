@@ -6,15 +6,11 @@ import de.lalex.modsystem.dataStorage.DataStorage;
 import de.lalex.modsystem.teammessages.TeamChatListener;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 @Slf4j
 public final class ModSystem extends JavaPlugin implements Serializable  {

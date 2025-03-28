@@ -9,6 +9,9 @@ team-log-prefix: "&9&lModSystem &b[Log] &8» "
 # Enables the team chat. Permitted members can send messages via adding @team at the beginning of the message.
 team-chat: true
 
+# Identifier which has to be at the beginning of the team chat message
+team-chat-identifier: "@teamchat"
+
 # Enables the team-log. In this "channel" all mod-actions are going to be logged.
 team-log: true
 
