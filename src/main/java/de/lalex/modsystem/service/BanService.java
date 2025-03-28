@@ -2,6 +2,7 @@ package de.lalex.modsystem.service;
 
 import de.lalex.modsystem.dataStorage.DataStorage;
 import de.lalex.modsystem.models.BanEntity;
+import de.lalex.modsystem.models.MuteEntity;
 import de.lalex.modsystem.models.PunishmentEntity;
 import de.lalex.modsystem.util.PunishmentType;
 import org.bukkit.entity.Player;
@@ -52,6 +53,21 @@ public class BanService {
         if(!isPlayerBanned(p)) return false;
         dataStorage.set(p.getUniqueId() + BANS_PATH, null);
         return true;
+    }
+
+    /**
+     * Method to override (refresh a ban)
+     * @param ban BanEntity of the new ban
+     * @param p Player to ban
+     */
+    public void overrideBan(@NotNull BanEntity ban, @NotNull Player p) {
+        dataStorage.set(p.getUniqueId() + BANS_PATH, ban);
+        punishmentsService.addPunishment(PunishmentEntity.builder()
+                .playerPunished(p.getUniqueId())
+                .timePunished(ZonedDateTime.now())
+                .punishmentReason(ban.getBanReason())
+                .punishmentType(PunishmentType.MUTE)
+                .build(), p);
     }
 
     /**
