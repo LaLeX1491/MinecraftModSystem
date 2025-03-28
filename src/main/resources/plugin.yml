@@ -10,3 +10,7 @@ commands:
     description: A command to clear the Chat
     aliases:
       - chatclear
+  kick:
+    description: Command to kick a player
+    aliases:
+      - k

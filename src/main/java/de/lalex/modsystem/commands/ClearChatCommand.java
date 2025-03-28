@@ -1,5 +1,6 @@
 package de.lalex.modsystem.commands;
 
+import de.lalex.modsystem.Config;
 import de.lalex.modsystem.ModSystem;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -18,37 +19,26 @@ public class ClearChatCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        if(commandSender instanceof Player) {
-            Player sender = (Player) commandSender;
+        if(commandSender instanceof Player sender) {
             if(sender.hasPermission(permission)) {
 
                 clearChat(sender);
 
+                return true;
             } else {
-                sender.sendMessage(ModSystem.getNoPermissionMessage());
-            }
-        } else {
-            if(commandSender.hasPermission(permission)) {
-
-            } else {
-                commandSender.sendMessage(ModSystem.getNoPermissionMessage());
+                sender.sendMessage(Config.getNoPermissionMessage());
             }
         }
         return false;
     }
 
     private void clearChat(@NotNull Player p) {
-        String configNoPerm = Objects.requireNonNull(ModSystem.getInstance().getConfig().getString("messages.cc"));
-        configNoPerm = configNoPerm.replace("%player%", p.getName());
-        configNoPerm = configNoPerm.replace("%prefix%", LegacyComponentSerializer.legacyAmpersand().serialize(ModSystem.getPrefix()));
-        final Component deletedMessage = LegacyComponentSerializer.legacyAmpersand().deserialize(configNoPerm);
-
         StringBuilder clearMessage = new StringBuilder();
         for (int i = 0; i < 200; i++) {
             clearMessage.append("\n");
         }
 
         Bukkit.getServer().broadcast(Component.text(String.valueOf(clearMessage)));
-        Bukkit.getServer().broadcast(deletedMessage);
+        Bukkit.getServer().broadcast(Config.getCCBroadcast(p));
     }
 }

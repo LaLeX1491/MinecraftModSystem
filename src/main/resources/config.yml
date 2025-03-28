@@ -3,9 +3,33 @@ timezone: "Europe/Berlin"
 
 # Prefix of the plugin
 prefix: "&9&lModSystem &8»"
+team-chat-prefix: "&9&lModSystem &b[Teamchat] &8»"
+team-log-prefix: "&9&lModSystem &b[Log] &8»"
+
+# Enables the team chat. Permitted members can send messages via adding @team at the beginning of the message.
+team-chat: true
+
+# Enables the team-log. In this "channel" all mod-actions are going to be logged.
+team-log: true
 
 messages:
   no-permission: "%prefix% &cDazu hast du keine Rechte!"
+  kick: "%prefix% Du hast &b%user% &rgekickt. Grund: &b%reason%"
+
+broadcasts:
+  team-log:
+    kick: "%prefix% &b%user% &rwurde von &b%operator% &rgekickt. Grund: &b%reason%"
   cc: "%prefix% &rDer Chat wurde von &b%player% &rgelöscht."
+
 permissions:
-  clear-chat: "modsystem.cc"
+  team-chat: "modsystem.teamchat"
+  team-log: "modsystem.teamlog"
+  cc: "modsystem.cc"
+  kick: "modsystem.kick"
+
+connect-messages:
+  kick: "&c&lDu wurdest Gekickt!\n\n&rGekickt von: &b%user%\n&rGrund: &b%reason%"
+
+error-messages:
+  insufficient-args: "%prefix% &cZu wenig Argumente! Bitte gebe mindestens %args% an!"
+  player-not-found: "%prefix% &cDer Spieler &b%playername% &cwurde nicht gefunden."

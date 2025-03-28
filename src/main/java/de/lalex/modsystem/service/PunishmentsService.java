@@ -28,7 +28,9 @@ public class PunishmentsService {
      */
     public List<PunishmentEntity> getPunishments(@NotNull Player p) {
         Object objectList = dataStorage.get(PUNISHMENTS_PATH + p.getUniqueId());
-        if(objectList instanceof List<?> rawList) {
+        if(objectList instanceof List<?> || objectList == null) {
+            List<?> rawList = (List<?>) objectList;
+            if(objectList == null) rawList = new ArrayList<>();
             List<PunishmentEntity> punishmentEntities = new ArrayList<>();
 
             for(Object obj : rawList) {

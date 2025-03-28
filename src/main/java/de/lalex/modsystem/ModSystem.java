@@ -1,6 +1,7 @@
 package de.lalex.modsystem;
 
 import de.lalex.modsystem.commands.ClearChatCommand;
+import de.lalex.modsystem.commands.KickCommand;
 import de.lalex.modsystem.dataStorage.DataStorage;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,7 @@ public final class ModSystem extends JavaPlugin implements Serializable  {
         this.saveDefaultConfig();
 
         getCommand("cc").setExecutor(new ClearChatCommand());
+        getCommand("kick").setExecutor(new KickCommand());
 
 
         pluginLogger.info("startup complete!");
@@ -44,16 +46,5 @@ public final class ModSystem extends JavaPlugin implements Serializable  {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-    }
-
-
-    public static @NotNull Component getPrefix() {
-        return LegacyComponentSerializer.legacyAmpersand().deserialize(Objects.requireNonNull(getInstance().getConfig().getString("prefix")));
-    }
-
-    public static @NotNull Component getNoPermissionMessage() {
-        String noPerm = Objects.requireNonNull(getInstance().getConfig().getString("messages.no-permission"));
-        noPerm = noPerm.replace("%prefix%", LegacyComponentSerializer.legacySection().serialize(getPrefix()));
-        return LegacyComponentSerializer.legacyAmpersand().deserialize(noPerm);
     }
 }
