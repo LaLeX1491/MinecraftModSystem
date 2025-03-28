@@ -24,6 +24,8 @@ public class BanEntity {
     @NotNull
     private UUID playerBanned;
     @NotNull
+    private UUID bannedBy;
+    @NotNull
     private ZonedDateTime timeBanned;
     @NotNull
     private String banReason;

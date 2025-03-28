@@ -25,6 +25,8 @@ public class MuteEntity implements ModSystemEntity {
     @NotNull
     private UUID playerMuted;
     @NotNull
+    private UUID mutedBy;
+    @NotNull
     private ZonedDateTime timeMuted;
     @NotNull
     private String reason;

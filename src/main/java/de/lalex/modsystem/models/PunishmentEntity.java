@@ -23,6 +23,8 @@ public class PunishmentEntity implements ModSystemEntity {
     @NotNull
     private UUID playerPunished;
     @NotNull
+    private UUID punishedBy;
+    @NotNull
     private ZonedDateTime timePunished;
     @NotNull
     private String punishmentReason;
